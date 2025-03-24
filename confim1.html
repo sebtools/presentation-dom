@@ -1,0 +1,26 @@
+    
+<div>
+    <form
+        action="split.cfm"
+        method="post"
+        onsubmit="return confirm('Are you sure you want to unmerge this parish This action will remove &quot;#encodeForHTMLAttribute(OrgName)#&quot; and cannot be undone.');"
+    >
+        <input type="hidden" name="OrgID" value="#OrgID#">
+        <input type="submit" value="Unmerge">
+    </form>
+</div>
+
+<!--
+Good News:
+-Readable!
+
+Accessibility: Sure! But, it's not the best practice.
+Readability: Yes! But, it's not the best practice.
+Separation of Concerns: No! Inline JavaScript is a no-no.
+Progressive Enhancement: No! Inline JavaScript is a no-no.
+Encapsulation: No! Inline JavaScript is a no-no.
+Cross-Browser Compatibility: Yes! But, it's not the best practice.
+Responsiveness: Yes! But, it's not the best practice.
+DRY: No! Inline JavaScript is a no-no.
+SEO: Yes! But, it's not the best practice.
+-->

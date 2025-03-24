@@ -1,0 +1,10 @@
+#observed {
+    width: 200px;
+    height: 100px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}

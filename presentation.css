@@ -1,0 +1,123 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Arial', sans-serif;
+    
+    color: #222;
+}
+
+/* Slide container */
+.slide {
+    background: #f4f4f4;
+    border:2px dashed black;
+    width: 80vw;
+    min-height: 80vh;
+    margin:40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in-out;
+}
+
+table {
+	min-width: 600px;
+    width:80%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+    padding:3px;
+}
+th {
+    background-color: #0078D4;
+    color:lightblue;
+}
+
+td:nth-child(3),
+td:nth-child(4) {
+    text-align: right;
+}
+
+/* Backgrounds for slides */
+/*
+.slide:nth-child(odd) {
+    background: #0078D4;
+    color: #fff;
+}
+
+.slide:nth-child(even) {
+    background: #F25022;
+    color: #fff;
+}
+*/
+
+/* Titles */
+h1, h2 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: bold;
+}
+h2 {
+    font-size: 2.5rem;
+}
+
+/* Paragraphs */
+body, p, li {
+    font-size: 1.5rem;
+}
+table {
+    font-size: 1rem;
+}
+
+/* Navigation buttons */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+    right: 10px;
+}
+
+th[aria-sort="ascending" i]::after {
+    content: "\25b2";
+    font-size: 0.7em;
+    padding-left: 3px;
+    line-height: 0.7em;
+}
+
+th[aria-sort="descending" i]::after {
+    content: "\25bc";
+    font-size: 0.7em;
+    padding-left: 3px;
+    line-height: 0.7em;
+}
+
+.chartwrap {
+    width:800px;
+    height:400px;
+    background-color:white;
+    border:1px solid black;
+}

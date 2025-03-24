@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Options Controller Documentation</title>
+	<link rel="stylesheet" type="text/css" href="documentation.css">
+</head>
+<body>
+
+	<h1>Options Controller</h1>
+
+	<p>Options Controller is a <a href="https://stimulus.hotwired.dev/">Stimulus</a> controller for retreiving options data from elsewhere on the page.</p>
+
+	<h2>Attributes</h2>
+
+	<h3>HTML Attributes</h3>
+
+	<p>These are standard HTML attributes (with no prefix) used by Table Sort.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>aria-busy</td>
+				<td>
+					table<br>
+				</td>
+				<td>false</td>
+				<td>
+					true<br>
+					false<br>
+				</td>
+				<td>
+					Table Sort will set this to true any time it is sorting the table.<br>
+					You can use the value in your CSS to indicate that work is in progress.<br>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+	<h3><span class="attprefix">data-</span> Attributes</h3>
+
+	<p>All of these attributes are prefixed with "data-" in the attribute name.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>controller</td>
+				<td>
+					table<br>
+				</td>
+				<td></td>
+				<td>options</td>
+				<td>
+					This attribute (on either element) provides the controller functionality.
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<h3><span class="attprefix">data-options-</span> Attributes</h3>
+
+	<p>All of these attributes are prefixed with "data-tablesort-" in the attribute name.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td rowspan="2">type</td>
+				<td rowspan="2">
+					th<br>
+				</td>
+				<td rowspan="2"></td>
+				<td>
+					Date<br>
+					Number<br>
+					String<br>
+				</td>
+				<td>
+					Indicates the type of data stored in the column. If not provided, the controller will search through the data to determine this.
+				</td>
+			</tr>
+			<tr>
+				<td>none</td>
+				<td>Disables sorting on this column.</td>
+			</tr>
+
+			<tr>
+				<td>source</td>
+				<td>
+					(root)<br>
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					(string)
+				</td>
+				<td>
+					The selector for the element holding the source data.
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+	<h2>Events</h2>
+
+	<h3><span class="prefix">tablesort:</span> Events</h3>
+
+	<table class="evts">
+		<thead>
+			<tr>
+				<th>Event</th>
+				<th>Parameters</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>connected</td>
+				<td>
+				</td>
+				<td>
+					Called any time that the controller is connected.
+				</td>
+			</tr>
+			<tr>
+				<td>disconnected</td>
+				<td>
+				</td>
+				<td>
+					Called any time that the controller is disconnected.
+				</td>
+			</tr>
+			<tr>
+				<td>sorted</td>
+				<td>
+				</td>
+				<td>
+					Called any time that the controller sorts the table.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>Methods</h2>
+
+</body>
+</html>

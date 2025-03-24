@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver Demo</title>
+    <link rel="stylesheet" type="text/css" href="mutation-observer.css">
+</head>
+<body>
+    <div id="observed">Watch Me</div>
+    
+    <form id="control">
+        <label>
+            Text:
+            <input type="text" id="textInput" placeholder="Enter text">
+        </label>
+        <label>
+            Background Color:
+            <input type="color" id="colorInput">
+        </label>
+        <button type="submit">Apply Changes</button>
+    </form>
+    
+    <h3>Change Log:</h3>
+    <ul id="logList"></ul>
+    
+    <script src="mutation-observer.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cloner Controller Documentation</title>
+	<link rel="stylesheet" type="text/css" href="documentation.css">
+</head>
+<body>
+
+	<h1>Cloner Controller</h1>
+
+	<p>Cloner Controller is a <a href="https://stimulus.hotwired.dev/">Stimulus</a> controller for copying HTML elements (and their children).</p>
+
+	<h2>Attributes</h2>
+
+	<h3>HTML Attributes</h3>
+
+	<p>These are standard HTML attributes (with no prefix) used by Table Sort.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>aria-busy</td>
+				<td>
+					*<br>
+				</td>
+				<td>false</td>
+				<td>
+					true<br>
+					false<br>
+				</td>
+				<td>
+					Controller will set this to true any time it is cloning an element.<br>
+					You can use the value in your CSS to indicate that work is in progress.<br>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<h3><span class="attprefix">data-</span> Attributes</h3>
+
+	<p>All of these attributes are prefixed with "data-" in the attribute name.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td>controller</td>
+				<td>
+					*
+				</td>
+				<td></td>
+				<td>cloner</td>
+				<td>
+					This attribute provides the cloner functionality.
+				</td>
+			</tr>
+
+			<tr>
+				<td>action</td>
+				<td>
+					*<br>
+				</td>
+				<td></td>
+				<td>cloner#clone</td>
+				<td>
+					Controller will automatically set this on elements with data-cloner-target="button".
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<h3><span class="attprefix">data-cloner-</span> Attributes</h3>
+
+	<p>All of these attributes are prefixed with "data-cloner-" in the attribute name.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+
+
+			<tr>
+				<td rowspan="3">target</td>
+				<td rowspan="3">
+					*<br>
+				</td>
+				<td rowspan="3"></td>
+				<td></td>
+				<td>
+					This will indicate if this is the element that issues the cloning or the element being cloned.
+				</td>
+			</tr>
+			<tr>
+				<td>source</td>
+				<td>
+					This is the element that will be cloned.
+				</td>
+			</tr>
+			<tr>
+				<td>button</td>
+				<td>
+					This is the element that will initiate the cloning.
+				</td>
+			</tr>
+
+			<tr>
+				<td>singlify</td>
+				<td>
+					this.element<br>
+				</td>
+				<td></td>
+				<td>(Selector)</td>
+				<td>
+					A selector to indicate all of the elements that should exist no more than one in the cloned instance.<br>
+					Use a comma-delimited to list to limit more than one selector.
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+</body>
+</html>

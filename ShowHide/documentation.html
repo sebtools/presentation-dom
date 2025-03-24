@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Show/Hide Controller Documentation</title>
+	<link rel="stylesheet" type="text/css" href="documentation.css">
+</head>
+<body>
+
+	<h1>Show/Hide Controller</h1>
+
+	<p>Show/Hide Controller is a <a href="https://stimulus.hotwired.dev/">Stimulus</a> controller for showing and hiding HTML elements based on the values of related form fields.</p>
+
+	<h2>Attributes</h2>
+
+	<h3><span class="attprefix">data-</span> Attributes</h3>
+
+	<p>All of these attributes are prefixed with "data-" in the attribute name.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>controller</td>
+				<td>
+					*
+				</td>
+				<td></td>
+				<td>showhide</td>
+				<td>
+					This attribute provides the Show/Hide functionality.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3><span class="attprefix">data-showhide-</span> Attributes</h3>
+
+	<p>All of these attributes are prefixed with "data-showhide-" in the attribute name.</p>
+
+	<table class="atts">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Element(s)</th>
+				<th>Default</th>
+				<th>Value(s)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td>type</td>
+				<td>
+					table<br>
+					canvas<br>
+				</td>
+				<td>bar</td>
+				<td>
+					bar<br>
+					line<br>
+					pie<br>
+					polarArea<br>
+					radar<br>
+				</td>
+				<td>
+					This indicates which type of chart to display.
+				</td>
+			</tr>
+
+			<tr>
+				<td>table</td>
+				<td>
+					canvas<br>
+				</td>
+				<td></td>
+				<td>
+					(any valid selector)
+				</td>
+				<td>
+					If data-controller is placed on the canvas element, this element will provide the selector for the table holding the data.
+				</td>
+			</tr>
+
+			<tr>
+				<td rowspan="5">canvas</td>
+				<td rowspan="5">
+					table<br>
+				</td>
+				<td rowspan="5">replace</td>
+				<td></td>
+				<td>
+					This can be provided as a selector to an existing canvas element on the page, or an indicator of how the controller should add the element to the page.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					(any valid selector)<br>
+				</td>
+				<td>
+					The selector for an existing canvas element on the page.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<i>before</i>
+				</td>
+				<td>
+					<p><i>Planned</i></p>
+					<p>Will add the canvas element before the table.</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<i>after</i>
+				</td>
+				<td>
+					<p><i>Planned</i></p>
+					<p>Will add the canvas element after the table.</p>
+				</td>
+			</tr>
+			<tr>
+				<td>replace</td>
+				<td>
+					The canvas element will replace the table on the page, hiding the table from display.<br>
+					The table will be the back-up in case canvas is not supported.
+				</td>
+			</tr>
+
+			<tr>
+				<td>options</td>
+				<td>
+					canvas<br>
+					table<br>
+				</td>
+				<td></td>
+				<td>
+					(JSON string)<br>
+				</td>
+				<td>
+					This will be a JSON representation of all of the <a href="https://www.chartjs.org/docs/latest/general/options.html">Chart.js options</a>.<br>
+					The controller will just pass this data through to Chart.js, so any option supported by Chart.js is available here.
+				</td>
+			</tr>
+			<tr>
+				<td>options</td>
+				<td>
+					col<br>
+					th<br>
+				</td>
+				<td></td>
+				<td>
+					(JSON string)<br>
+				</td>
+				<td>
+					This will be a JSON representation of options that will be supplied in the "data" key of the dataset for this column.
+				</td>
+			</tr>
+			<tr>
+				<td>value</td>
+				<td>
+					td<br>
+				</td>
+				<td></td>
+				<td>
+					(any string)<br>
+				</td>
+				<td>
+					If provided, the controller will use this for the value of the cell, instead of what is in the cell itself (or the data-value attribute).
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

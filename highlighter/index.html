@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Highlighter Example</title>
+	<style type="text/css">
+		.highlight {
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<h1>Highlighter Example Page</h1>
+	<p>This is an example page to demonstrate the highlighter controller.</p>
+
+	<div data-controller="highlighter" words="paragraph selecting">
+		<p>
+			Highlight the text in this paragraph by selecting it with your mouse.
+		</p>
+	</div>
+
+	<script src="js/controllers/highlighter_controller.js" type="module"></script>
+
+</body>
+</html>
