@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combination Page</title>
+	<link rel="stylesheet" type="text/css" href="presentation.css">
+	<script src="force_and_check.js"></script>
+</head>
+<body>
+	<table
+		id="phrases"
+		class="p-phrases"
+		data-controller="checkall forcecheck tablefilter"
+		data-forcecheck-alert="Once created, sponsor-specific phrases can only be removed by the developers."
+	>
+		<thead>
+			<tr>
+				<th data-tablefilter-addfilter="false"><input type="checkbox" name="all" value="0" data-checkall-target="all"></th>
+				<th>Phrase</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="checkbox" id="row-1" name="row" value="1" data-checkall-target="checkbox"></td>
+				<td><label for="row-1">Example Phrase 1</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="row-2" name="row" value="2" data-checkall-target="checkbox" data-forcecheck-force="true"></td>
+				<td><label for="row-2">Harrison Ford</label></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="row-3" name="row" value="3" data-checkall-target="checkbox"></td>
+				<td><label for="row-3">Mark Hamill</label></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="row-4" name="row" value="4" data-checkall-target="checkbox"></td>
+				<td><label for="row-4">Carrie Fischer</label></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="row-5" name="row" value="5" data-checkall-target="checkbox"></td>
+				<td><label for="row-5">Alec Guiness</label></td>
+			</tr>
+		</tbody>
+	</table>
+
+<script src="js/stimulus.js"></script>
+<script src="js/app.js"></script>
+<script src="checkall/js/controllers/checkall_controller.js" type="module"></script>
+<script src="forcecheck/js/controllers/forcecheck_controller.js" type="module"></script>
+<script src="tablefilter/js/controllers/tablefilter_controller.js" type="module"></script>
+
+</body>
+</html>
