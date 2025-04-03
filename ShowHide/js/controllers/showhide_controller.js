@@ -1,6 +1,4 @@
-import { Controller } from "https://unpkg.com/stimulus/dist/stimulus.umd.js"
-
-oShowHideUtil = {
+const oShowHideUtil = {
 	findKeysInString(str, obj) {
 		const keys = Object.keys(obj);
 		const aKeys = [];
@@ -32,9 +30,8 @@ oShowHideUtil = {
 		return aResults;
 	},
 
-
 	getOperator(pair) {
-		aKeys = oShowHideUtil.removeSubstringKeys(oShowHideUtil.findKeysInString(pair,oShowHideUtil.getOperators()));
+		const aKeys = oShowHideUtil.removeSubstringKeys(oShowHideUtil.findKeysInString(pair,oShowHideUtil.getOperators()));
 
 		if ( aKeys.length == 1 ) {
 			return aKeys[0];
@@ -127,7 +124,12 @@ oShowHideUtil = {
 
 // Original: https://blog.corsego.com/stimulus-display-show-hide-div-based-on-value
 
-export default class extends Controller {	static requires = [ "eraser" ]
+application.register('showhide', class extends Stimulus.Controller {
+	static requires = [ "eraser" ]
+
+	initialize() {
+		this.dispatch("initialized");
+	}
 
 	connect() {
 
@@ -137,6 +139,12 @@ export default class extends Controller {	static requires = [ "eraser" ]
 
 		this.config();
 
+		this.dispatch("connected");
+
+	}
+
+	disconnect() {
+		this.dispatch("disconnected");
 	}
 
 	config() {
@@ -164,14 +172,19 @@ export default class extends Controller {	static requires = [ "eraser" ]
 		for ( var elem of aElems ) {
 			var doShow = this._showhide(elem,"show");
 			var doHide = this._showhide(elem,"hide");
+			var action = "";
 
 			//Only take action if one and only one of doHide and soShow are boolean
 			if ( this._xorBoolean(doShow,doHide) ) {
 				if ( typeof doShow == "boolean" ) {
 					elem.hidden = !doShow;
+					action = doShow ? "show" : "hide";
+					this.dispatch("acted", { detail: { element: elem, show: doShow } });
 				}
 				if ( typeof doHide == "boolean" ) {
 					elem.hidden = doHide;
+					action = doHide ? "hide" : "show";
+					this.dispatch("acted", { detail: { element: elem, hide: doHide } });
 				}
 			}
 		}
@@ -456,4 +469,4 @@ export default class extends Controller {	static requires = [ "eraser" ]
 		);
 	}
 
-}
+});

@@ -1,10 +1,37 @@
 application.register('selectinput', class extends Stimulus.Controller {
 	static targets = ["select","input","datalist"];
 
+	initialize() {
+		this.dispatch("initialized");
+	}
+
 	connect() {
 		this.config();
 
 		this.eventSource = "";
+
+		this.dispatch("connected");
+	}
+
+	disconnect() {
+
+		// Remove the datalist and input elements
+		if ( this.datalist ) {
+			this.datalist.remove();
+		}
+		if ( this.input ) {
+			this.input.remove();
+		}
+		// Show the original select element
+		if ( this.selectTarget ) {
+			this.selectTarget.style.display = "";
+		}
+		// Remove the list attribute from the select element
+		if ( this.selectTarget ) {
+			this.selectTarget.removeAttribute("list");
+		}
+
+		this.dispatch("disconnected");
 	}
 
 	config() {

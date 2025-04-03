@@ -1,6 +1,4 @@
-import { Controller } from "https://unpkg.com/stimulus/dist/stimulus.umd.js"
-
-export default class extends Controller {
+application.register('eraser', class extends Stimulus.Controller {
 
 	initialize() {
 		
@@ -203,4 +201,4 @@ export default class extends Controller {
 		return true;
 	}
 
-}
+});

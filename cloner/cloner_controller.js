@@ -8,13 +8,19 @@ application.register('cloner', class extends Stimulus.Controller {
 	}
 
 	initialize() {
-
+		this.dispatch("initialized");
 	}
 
 	connect() {
 
 		this.config();
 
+		this.dispatch("connected");
+
+	}
+
+	disconnect() {
+		this.dispatch("disconnected");
 	}
 
 	config() {
@@ -41,7 +47,15 @@ application.register('cloner', class extends Stimulus.Controller {
 
 	busy(isBusy) {
 
-		this.element.ariaBusy = isBusy;
+		// Add or remove identifier from busywith attribute to indicate that the element is busy with this controller
+		if ( isBusy ) {
+			this.element.dataset.busywith = (this.element.dataset.busywith || '') + ' ' + this.identifier;
+		} else {
+			this.canvas.element.busywith = (this.element.dataset.busywith || '').replace(this.identifier, '').trim();
+		}
+
+		// Set aria-busy attribute to indicate that the element is doing anything
+		this.element.ariaBusy = ( this.element.dataset.busywith.length > 0 );
 
 	}
 
@@ -93,6 +107,8 @@ application.register('cloner', class extends Stimulus.Controller {
 		}
 
 		this.busy(false);
+
+		this.dispatch("cloned");
 		
 		//In case any other code needs to respond to the addition of this element.
 		this.dispatch('load', {
@@ -122,24 +138,12 @@ application.register('cloner', class extends Stimulus.Controller {
 	}
 
 	replaceDigitsWithNumber(str, regex, number) {
-		/*
-		return str.replace(regex, function(match, group1, group2) {
-			// Check if the second capturing group contains only digits
-			if (/^\d+$/.test(group2)) {
-				return group1 + number; // Replace only the digits with the specified number
-			} else {
-				return match; // Keep the match unchanged
-			}
-		});
-		*/
 		return str.replace(regex, function() {
-			//console.table(arguments);
-			//console.log(arguments[1] + number);
 			return arguments[1] + number;
-			return arguments[1].replace(arguments[1],number);
 		});
 	}
 
+	//Singlify the element by removing duplicates of the specified selector.
 	singlify(element) {
 		var selectors = '.counsel,[data-showhide-show="hasAlias_1=Yes"]>div';
 		var aSelectors = selectors.split(",");
@@ -147,6 +151,7 @@ application.register('cloner', class extends Stimulus.Controller {
 		for ( var selector of aSelectors ) {
 			this.removeDuplicates(element, selector);
 		}
+
 	}
 
 })

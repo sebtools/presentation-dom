@@ -118,6 +118,14 @@ application.register('chartjs', class extends Stimulus.Controller {
 
 	}
 
+	dispatch(eventName) {
+
+		arguments.canvas = this.canvas;
+		arguments.table = this.table;
+
+		super.dispatch(eventName, ...arguments);
+	}
+
 	loadMutationObserver() {
 		this.observer = new MutationObserver(
 			(mutations) => this.mutationListener(mutations)

@@ -20,6 +20,11 @@ application.register('formprogress', class extends Stimulus.Controller {
 
 	disconnect() {
 
+		// Remove the mutation observer when the controller is disconnected
+		if ( this.observer ) {
+			this.observer.disconnect();
+		}
+
 		this.dispatch("disconnected");
 
 	}
@@ -34,7 +39,17 @@ application.register('formprogress', class extends Stimulus.Controller {
 	}
 
 	busy(isBusy) {
-		this.progressTarget.ariaBusy = isBusy;
+
+		// Add or remove identifier from busywith attribute to indicate that the element is busy with this controller
+		if ( isBusy ) {
+			this.element.dataset.busywith = (this.element.dataset.busywith || '') + ' ' + this.identifier;
+		} else {
+			this.element.dataset.busywith = (this.element.dataset.busywith || '').replace(this.identifier, '').trim();
+		}
+
+		// Set aria-busy attribute to indicate that the element is doing anything
+		this.element.ariaBusy = ( this.element.dataset.busywith.length > 0 );
+
 	}
 
     getProgress() {
@@ -125,30 +140,30 @@ application.register('formprogress', class extends Stimulus.Controller {
     }
 
     _addMutationListeners() {
-		const observer = new MutationObserver(() => {
+		this.observer = new MutationObserver(() => {
 			this.setProgress();
 		});
 		
 		// Any change to the form will reset the progress
-		observer.observe(this.element, {
+		this.observer.observe(this.element, {
 			childList: true,
 			subtree: true
 		});
-		observer.observe(this.element, {
+		this.observer.observe(this.element, {
 			attributes: true,
 			attributeFilter: ['style'],
 			subtree: true
 		});
 
 		// Any change to the progress bar will reset the progress
-		observer.observe(this.progressTarget, {
+		this.observer.observe(this.progressTarget, {
 			attributes: true,
 			attributeFilter: ['value', 'max']
 		});
 
 		// Any change to the form's required fields will reset the progress
 		this.element.querySelectorAll('[required]').forEach(field => {
-			observer.observe(field, {
+			this.observer.observe(field, {
 				attributes: true,
 				attributeFilter: ['required']
 			});
@@ -156,7 +171,7 @@ application.register('formprogress', class extends Stimulus.Controller {
 
 		// Any change to the form's fieldsets will reset the progress
 		this.element.querySelectorAll('fieldset').forEach(fieldset => {
-			observer.observe(fieldset, {
+			this.observer.observe(fieldset, {
 				attributes: true,
 				attributeFilter: ['disabled', 'hidden', 'style', 'aria-hidden', 'required'],
 			});

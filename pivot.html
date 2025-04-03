@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pivot Table</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+    <h2>Original Table</h2>
+    <table id="sourceTable">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Quarter</th>
+                <th>Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Electronics</td><td>Phones</td><td>Q1</td><td>100</td></tr>
+            <tr><td>Electronics</td><td>Phones</td><td>Q2</td><td>120</td></tr>
+            <tr><td>Electronics</td><td>Phones</td><td>Q3</td><td>140</td></tr>
+            <tr><td>Electronics</td><td>Phones</td><td>Q4</td><td>130</td></tr>
+            <tr><td>Electronics</td><td>Laptops</td><td>Q1</td><td>80</td></tr>
+            <tr><td>Electronics</td><td>Laptops</td><td>Q2</td><td>90</td></tr>
+            <tr><td>Electronics</td><td>Laptops</td><td>Q3</td><td>100</td></tr>
+            <tr><td>Electronics</td><td>Laptops</td><td>Q4</td><td>110</td></tr>
+            <tr><td>Home Appliances</td><td>Fridges</td><td>Q1</td><td>50</td></tr>
+            <tr><td>Home Appliances</td><td>Fridges</td><td>Q2</td><td>70</td></tr>
+            <tr><td>Home Appliances</td><td>Fridges</td><td>Q3</td><td>90</td></tr>
+            <tr><td>Home Appliances</td><td>Fridges</td><td>Q4</td><td>100</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Pivot Table</h2>
+    <div data-controller="pivottable"
+        data-pivottable-source="sourceTable"
+        data-pivottable-group="Category,Subcategory"
+        data-pivottable-sort="Category"
+        data-pivottable-field="Sales"
+        data-pivottable-operation="sum"
+        data-pivottable-pivot="Quarter">
+    </div>
+
+    <script>
+        function buildPivotTable(controller) {
+            let sourceTableId = controller.getAttribute("data-pivottable-source");
+            let sourceTable = document.getElementById(sourceTableId);
+
+            if (!sourceTable) {
+                console.error(`Source table with ID "${sourceTableId}" not found.`);
+                return;
+            }
+
+            let groupColumns = controller.getAttribute("data-pivottable-group").split(",");
+            let sortColumn = controller.getAttribute("data-pivottable-sort");
+            let dataField = controller.getAttribute("data-pivottable-field");
+            let operation = controller.getAttribute("data-pivottable-operation");
+            let pivotColumn = controller.getAttribute("data-pivottable-pivot");
+
+            let data = {};
+            let counts = {};
+            let uniqueColumns = new Set();
+            let rows = Array.from(sourceTable.querySelectorAll("tbody tr"));
+
+            // Find field indexes dynamically
+            let headers = Array.from(sourceTable.querySelectorAll("thead th"));
+            let fieldIndex = headers.findIndex(th => th.textContent === dataField);
+            let pivotIndex = headers.findIndex(th => th.textContent === pivotColumn);
+            let groupIndexes = groupColumns.map(col => headers.findIndex(th => th.textContent === col));
+
+            if (fieldIndex === -1 || pivotIndex === -1) {
+                console.error(`Field "${dataField}" or pivot column "${pivotColumn}" not found.`);
+                return;
+            }
+
+            // Read the original table data
+            rows.forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let groupKey = groupIndexes.map(index => cells[index].textContent).join("|");
+                let pivotValue = cells[pivotIndex].textContent;
+                let value = parseFloat(cells[fieldIndex].textContent);
+
+                uniqueColumns.add(pivotValue);
+
+                if (!data[groupKey]) {
+                    data[groupKey] = {};
+                    counts[groupKey] = {};
+                }
+
+                if (!data[groupKey][pivotValue]) {
+                    data[groupKey][pivotValue] = 0;
+                    counts[groupKey][pivotValue] = 0;
+                }
+
+                data[groupKey][pivotValue] += value;
+                counts[groupKey][pivotValue]++;
+            });
+
+            // Apply aggregation operation
+            if (operation === "avg") {
+                Object.keys(data).forEach(key => {
+                    Object.keys(data[key]).forEach(pivotValue => {
+                        if (counts[key][pivotValue] > 0) {
+                            data[key][pivotValue] = (data[key][pivotValue] / counts[key][pivotValue]).toFixed(2);
+                        }
+                    });
+                });
+            }
+
+            // Sort data based on the specified column
+            let sortedKeys = Object.keys(data).sort((a, b) => {
+                let aValue = a.split("|")[groupColumns.indexOf(sortColumn)];
+                let bValue = b.split("|")[groupColumns.indexOf(sortColumn)];
+                return aValue.localeCompare(bValue);
+            });
+
+            // Create table dynamically
+            let table = document.createElement("table");
+            let thead = document.createElement("thead");
+            let tbody = document.createElement("tbody");
+            let theadRow = document.createElement("tr");
+
+            // Create dynamic headers
+            let sortedColumns = Array.from(uniqueColumns).sort();
+            theadRow.innerHTML = `<th>${groupColumns.join("</th><th>")}</th>` + sortedColumns.map(c => `<th>${c}</th>`).join("") + "<th>Total</th>";
+            thead.appendChild(theadRow);
+
+            // Populate the pivot table
+            sortedKeys.forEach(key => {
+                let groupValues = key.split("|");
+                let row = document.createElement("tr");
+
+                let rowData = groupValues.map(val => `<td>${val}</td>`);
+                let total = 0;
+
+                sortedColumns.forEach(pivotValue => {
+                    let value = data[key][pivotValue] || 0;
+                    total += parseFloat(value);
+                    rowData.push(`<td>${value}</td>`);
+                });
+
+                rowData.push(`<td><strong>${total}</strong></td>`);
+                row.innerHTML = rowData.join("");
+                tbody.appendChild(row);
+            });
+
+            // Append table to pivot container
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            controller.innerHTML = ""; // Clear previous table if any
+            controller.appendChild(table);
+        }
+
+        // Automatically apply pivot table to all elements with data-controller="pivottable"
+        document.querySelectorAll('[data-controller="pivottable"]').forEach(buildPivotTable);
+    </script>
+
+</body>
+</html>

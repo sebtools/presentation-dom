@@ -1,5 +1,3 @@
-import { Controller } from "/lib/stimulus/app.js";
-
 /*
 Courier Controller
 
@@ -42,8 +40,12 @@ When the custom-event is triggered, the controller will copy data from the sourc
 
 */
 
-application.register('courier', class extends Controller {
+application.register('courier', class extends Stimulus.Controller {
 	static targets = ["source","target"];
+
+	initialize() {
+		this.dispatch("initialized");
+	}
 
 	connect() {
 		const method = this.update.bind(this);
@@ -52,12 +54,13 @@ application.register('courier', class extends Controller {
 		if ( this.element.dataset.courierEvent ) {
 			const events = this.element.dataset.courierEvent.split(" ");
 			events.forEach(event => {
-				console.log(event);
 				window.addEventListener(event, method);
 			});
 		}
 
 		window.addEventListener("courier:update", method);
+
+		this.dispatch("connected");
   	}
 
 	disconnect() {
@@ -72,6 +75,8 @@ application.register('courier', class extends Controller {
 		}
 
 		window.removeEventListener("courier:update", method);
+
+		this.dispatch("disconnected");
   	}
 
 	//Transmit data from source to target
@@ -101,7 +106,7 @@ application.register('courier', class extends Controller {
 
 	//Update all targets with values from sources
 	update() {
-		
+
 		//Update targets with values from sources
 		this.targetTargets.forEach(target => {
 			const sourceId = target.dataset.sourceId;
@@ -123,7 +128,6 @@ application.register('courier', class extends Controller {
 			
 			this.copy(source,target);
 		});
-
 
 	}
 

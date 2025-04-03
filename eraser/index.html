@@ -2,45 +2,18 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<title>Eraser</title>
 </head>
 <body>
 
-<div>
-<form action="action.cfm" method="post" data-controller="eraser" data-eraser-clearhidden-on="submit">
-	<input type="hidden" name="id" value="1">
-	
-	<div>
-		<select name="species">
-			<option selected="selected" value=""></option>
-			<option value="human">human</option>
-			<option value="animal">animal</option>
-		</select>
-	</div>
-	
-	<div>
-		<select name="fruit" hidden>
-			<option value=""></option>
-			<option selected="selected" value="1">apple</option>
-			<option value="2">banana</option>
-			<option value="3">pear</option>
-		</select>
-	</div>
-	
-	<div hidden>
-		<input name="foo" value="bar" data-action>
-	</div>
+	<h1>Eraser</h1>
 
-	<div>
-		<input type="submit" value="Submit">
-	</div>
+	<p>Eraser is a Stimulus controller for clearing out hidden form fields. This does *not* empty out fields of type="hidden", but rather other form fields that are hidden by either CSS or the "hidden" HTML attribute.</p>
 
-</form>
-</div>
-
-
-<script src="js/stimulus.js"></script>
-<script src="js/app.js"></script>
-<script src="js/controllers/eraser_controller.js"></script>
+	<ul>
+		<li><a href="documentation.html">Documentation</a></li>
+		<li><a href="simple.html">Example</a></li>
+	</ul>
 
 </body>
 </html>

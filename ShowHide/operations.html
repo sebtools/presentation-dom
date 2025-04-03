@@ -12,13 +12,7 @@
 		table th, table td {
 			padding: 0.75rem;
 			vertical-align: top;
-			border-left:1px solid black;
-		}
-		table th:first-child, table td:first-child {
-			border-left:none;
-		}
-		table td {
-			border-top: 1px solid black;
+			border:1px solid black;
 		}
 		table th {
 			text-align:left;
@@ -45,7 +39,7 @@
 -->
 	  
 <div data-controller="showhide">
-	<button type="button" data-action="eraser#clearAll">Erase</button>
+	<!--<button type="button" data-action="eraser#clearAll">Erase</button>-->
 	
 	<div>
 		<input type="checkbox" name="options" id="options-apple" value="Apple"> <label for="options-apple">Apple</label>
@@ -71,12 +65,14 @@
 	<table>
 		<tr>
 			<th>Criteria</th>
+			<th>Syntax</th>
 			<th>Result</th>
 		</tr>
 		<tr>
 			<td>
 				Any value at all selected.
 			</td>
+			<td>data-showhide-show="options"</td>
 			<td>
 				<div class="check" data-showhide-show="options">
 					&check;
@@ -87,6 +83,7 @@
 			<td>
 				Exactly: "Apple"
 			</td>
+			<td>data-showhide-show="options=Apple"</td>
 			<td>
 				<div class="check" data-showhide-show="options=Apple">
 					&check;
@@ -97,6 +94,7 @@
 			<td>
 				Exactly: "Apple" and "Banana" (and nothing else)
 			</td>
+			<td>data-showhide-show="options=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="options=Apple,Banana">
 					&check;
@@ -107,6 +105,7 @@
 			<td>
 				Includes all of: Apple, Banana
 			</td>
+			<td>data-showhide-show="options+=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="options+=Apple,Banana">
 					&check;
@@ -117,6 +116,7 @@
 			<td>
 				Doesn't Include: Apple
 			</td>
+			<td>data-showhide-show="options-=Apple"</td>
 			<td>
 				<div class="check" data-showhide-show="options-=Apple">
 					&check;
@@ -127,6 +127,7 @@
 			<td>
 				Doesn't Include any of: Apple, Banana
 			</td>
+			<td>data-showhide-show="options-=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="options-=Apple,Banana">
 					&check;
@@ -137,6 +138,7 @@
 			<td>
 				Doesn't Include any of: Apple, Banana
 			</td>
+			<td>data-showhide-show="options!|=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="options!|=Apple,Banana">
 					&check;
@@ -147,6 +149,7 @@
 			<td>
 				Any of: "Apple", "Banana", "Cherry"
 			</td>
+			<td>data-showhide-show="options|=Apple,Banana,Cherry"</td>
 			<td>
 				<div class="check" data-showhide-show="options|=Apple,Banana,Cherry">
 					&check;
@@ -157,6 +160,7 @@
 			<td>
 				Any value other than exactly: "Apple"
 			</td>
+			<td>data-showhide-show="options!=Apple"</td>
 			<td>
 				<div class="check" data-showhide-show="options!=Apple">
 					&check;
@@ -168,6 +172,7 @@
 			<td>
 				Any value other than exactly: "Apple" and "Banana"
 			</td>
+			<td>data-showhide-show="options!=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="options!=Apple,Banana">
 					&check;
@@ -178,6 +183,7 @@
 			<td>
 				Everything except: "Apple" and "Banana"
 			</td>
+			<td>data-showhide-show="options!=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="options+!=Apple,Banana">
 					&check;
@@ -188,7 +194,7 @@
 	</table>
 
 
-	<select name="fRuit">
+	<select name="Fruit">
 		<option></option>
 		<option value="1">Apple</option>
 		<option value="2"> Banana</option>
@@ -202,12 +208,14 @@
 	<table>
 		<tr>
 			<th>Criteria</th>
+			<th>Syntax</th>
 			<th>Result</th>
 		</tr>
 		<tr>
 			<td>
 				Any value at all selected.
 			</td>
+			<td>data-showhide-show="Fruit"</td>
 			<td>
 				<div class="check" data-showhide-show="Fruit">
 					&check;
@@ -218,6 +226,7 @@
 			<td>
 				Exactly: "Apple"
 			</td>
+			<td>data-showhide-show="fruit=Apple"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit=Apple">
 					&check;
@@ -228,6 +237,7 @@
 			<td>
 				Exactly: "Apple" and "Banana" (and nothing else)
 			</td>
+			<td>data-showhide-show="fruit=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit=Apple,Banana">
 					&check;
@@ -238,6 +248,7 @@
 			<td>
 				Includes all of: Apple, Banana
 			</td>
+			<td>data-showhide-show="fruit+=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit+=Apple,Banana">
 					&check;
@@ -248,6 +259,7 @@
 			<td>
 				Doesn't Include: Apple
 			</td>
+			<td>data-showhide-show="fruit-=Apple"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit-=Apple">
 					&check;
@@ -258,6 +270,7 @@
 			<td>
 				Doesn't Include any of: Apple, Banana
 			</td>
+			<td>data-showhide-show="fruit-=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit-=Apple,Banana">
 					&check;
@@ -268,6 +281,7 @@
 			<td>
 				Doesn't Include any of: Apple, Banana
 			</td>
+			<td>data-showhide-show="fruit!|=Apple,Banana"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit!|=Apple,Banana">
 					&check;
@@ -278,6 +292,7 @@
 			<td>
 				Any of: "Apple", "Banana", "Cherry"
 			</td>
+			<td>data-showhide-show="fruit|=Apple,Banana,Cherry"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit|=Apple,Banana,Cherry">
 					&check;
@@ -288,6 +303,7 @@
 			<td>
 				Any value other than exactly: "Apple"
 			</td>
+			<td>data-showhide-show="fruit!=Apple"</td>
 			<td>
 				<div class="check" data-showhide-show="fruit!=Apple">
 					&check;
@@ -299,12 +315,14 @@
 	<table>
 		<tr>
 			<th>Criteria</th>
+			<th>Syntax</th>
 			<th>Result</th>
 		</tr>
 		<tr>
 			<td>
 				Any value at all selected for either options or fruit.
 			</td>
+			<td>data-showhide-show="options&Fruit" data-showhide-join="or"</td>
 			<td>
 				<div class="check" data-showhide-show="options&Fruit" data-showhide-join="or">
 					&check;
@@ -319,8 +337,8 @@
 
 <script src="js/stimulus.js"></script>
 <script src="js/app.js"></script>
-<script src="js/controllers/showhide_controller.js"></script>
-<script src="/eraser/js/controllers/eraser_controller.js"></script>
+<script src="../eraser/js/controllers/eraser_controller.js" type="module"></script>
+<script src="js/controllers/showhide_controller.js" type="module"></script>
 
 </body>
 </html>

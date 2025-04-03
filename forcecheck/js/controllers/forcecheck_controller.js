@@ -54,35 +54,19 @@ application.register('forcecheck', class extends Stimulus.Controller {
 
 		if ( forceValue === "true" || forceValue === "false" ) {
 
-			
-
 			checkbox.checked = (  forceValue === "true" );
 
-			
-
 			//Show an alert if requested and if there is one to show.
-
 			if ( doAlert ) {
-
 				let alertMessage = checkbox.getAttribute("data-forcecheck-alert");
-
 				if ( !alertMessage ) {
-
 					alertMessage = this.element.getAttribute("data-forcecheck-alert");
-
 				}
-
 				if ( alertMessage ) {
-
 					alert(alertMessage);
-
 				}
-
 			}
-
-			this.dispatch("forced", { target: checkbox });
-
-			
+			this.dispatch("forced", { target: checkbox, forceValue: forceValue });
 
 		}
 
